@@ -1,0 +1,28 @@
+.popular {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .box {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px 10px;
+    padding: 0 1rem;
+  }
+  
+  .title {
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+    color: aliceblue;
+    size: 6rems;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  
+  .content {
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    background-color: rgb(35, 35, 35);
+  }
+  

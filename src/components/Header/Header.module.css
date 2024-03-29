@@ -1,0 +1,78 @@
+.logo {
+  display: block;
+  margin-right: 16px;
+  text-decoration: none;
+}
+
+.logo h3 {
+  margin: 0;
+  padding: 0;
+  color: yellow;
+}
+
+.header {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  background-color: rgb(8, 51, 87);
+  transition: top 0.2s linear;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.headerLink {
+  color: white;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.headerLink:hover {
+  opacity: 0.75;
+}
+
+.input {
+  width: 80%;
+  background: transparent;
+  margin: 0;
+  padding: 7px 8px;
+  color: white;
+  min-width: 400px;
+  border: 1px solid rgb(7 65 112);
+  border-radius: inherit;
+  border-right: 0;
+}
+.input[type="search"]::placeholder {
+  color: #bbb;
+}
+
+.searchParent {
+  color: #555;
+  display: flex;
+  padding: 2px;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.button {
+  cursor: pointer;
+  opacity: 0.8;
+  border: 2px solid rgb(84, 162, 239);
+  background: transparent;
+  color: white;
+  padding: 0 0.5rem;
+}
+
+.button:hover {
+  opacity: 1;
+}
+
+.InOut {
+  justify-content: space-between;
+}
+
+.InOut button {
+  margin-left: 10px;
+}
