@@ -30,6 +30,8 @@ const Header = () => {
   const onSignOut = () => {
     context.setLogin(false);
     localStorage.removeItem("email");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("name");
     context.setLogin(false);
 
     navigate("/");

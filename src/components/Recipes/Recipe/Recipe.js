@@ -4,6 +4,7 @@ import { BiHeart } from "react-icons/bi";
 import { useNavigate } from "react-router";
 import userContext from "../../../Store/context";
 import image from "../../../assets/No_Image_Available.jpg";
+import { addToBookmark } from "../../../services/api/endpoints/bookmark";
 //   import { db } from "../../../config/firebase";
 import Card from "../../Card/Card";
 import classes from "./Recipe.module.css";
@@ -20,7 +21,13 @@ const Recipe = ({ element, isLiked = false, onDisLike = null }) => {
     console.log(e);
     e.stopPropagation();
     if (!liked) {
-      //   setLiked(true);
+      const recipeId = element.id;
+      const requestBody = {
+        recipeId,
+      };
+      const res = await addToBookmark(requestBody);
+
+      setLiked(true);
     } else {
     }
   }

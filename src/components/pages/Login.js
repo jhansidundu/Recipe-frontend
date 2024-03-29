@@ -24,12 +24,12 @@ export const Login = () => {
       data: requestBody, // This will be sent in the request body
     };
     const res = await login(config.data);
-    console.log(res.name);
-    console.log(res.data.accessToken);
+    // console.log(res.name);
+    // console.log(res.data.accessToken);
     const accessToken = res.data.accessToken;
     localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("name", res.name);
-    localStorage.setItem("email", res.email);
+    localStorage.setItem("name", res.data.name);
+    localStorage.setItem("email", res.data.email);
     context.setLogin(true);
     navigate("/");
   };
