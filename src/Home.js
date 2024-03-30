@@ -1,4 +1,4 @@
-import Popular from "./components/Recipes/Popular";
+import Popular from "./components/recipes/popular/Popular";
 
 const Home = () => {
   return <Popular />;

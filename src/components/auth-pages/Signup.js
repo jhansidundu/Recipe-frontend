@@ -1,8 +1,6 @@
-import { login, signup } from "../../services/api/endpoints/auth.Api";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import userContext from "../../Store/context";
-import { useContext } from "react";
-import axios from "axios";
+import { signup } from "../../services/api/endpoints/auth.api";
 export const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,38 +9,29 @@ export const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const context = useContext(userContext);
   const handleSignup = async (name, email, phoneNumber, password) => {
-    const requestBody = {
+    const payload = {
       name: name,
       email: email,
       phoneNumber: phoneNumber,
       password: password,
     };
-
-    const config = {
-      data: requestBody, // This will be sent in the request body
-    };
-    const res = await signup(config.data);
-    console.log("this is console in signup ", res.email);
-    // console.log(res);
-
+    const res = await signup(payload);
     localStorage.setItem("email", res.email);
     localStorage.setItem("name", res.name);
     context.setEmail(res.email);
     context.setLogin(true);
   };
+
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic validation (replace with more robust validation)
+    // validation
     if (!name || !email || !phoneNumber || !password) {
       setErrorMessage("Please fill in all fields");
       return;
     }
-
     handleSignup(name, email, phoneNumber, password);
-
-    // Simulate login (replace with actual authentication logic)
   };
 
   return (

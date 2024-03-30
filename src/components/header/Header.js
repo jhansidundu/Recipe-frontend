@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import userContext from "../../Store/context.js";
 import classes from "./Header.module.css";
-import SearchedRecipes from "../Recipes/SearchedRecipes/SearchRecipes.js";
 const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
@@ -24,9 +23,7 @@ const Header = () => {
   const onSignUp = () => {
     navigate("/signup");
   };
-  const onGetLike = () => {
-    // navigate("/likedlist");
-  };
+  const onGetLike = () => {};
   const onSignOut = () => {
     context.setLogin(false);
     localStorage.removeItem("email");
@@ -40,7 +37,6 @@ const Header = () => {
     <>
       <header className={classes.header}>
         <Link className={classes.logo} to="/home">
-          {/* <img src={image} /> */}
           <h3>Recipes</h3>
         </Link>
 

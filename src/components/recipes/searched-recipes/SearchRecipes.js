@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-import { PROXY_URL, APIKEY } from "../../../constants";
-import classes from "./SearchRecipes.module.css";
-import Recipe from "../Recipe/Recipe";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { APIKEY, PROXY_URL } from "../../../constants";
+import Recipe from "../recipe-card/Recipe";
+import classes from "./SearchRecipes.module.css";
 const SearchedRecipes = () => {
   const [data, setData] = useState([]);
   const [searchParams] = useSearchParams();

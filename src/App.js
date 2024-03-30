@@ -1,14 +1,12 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Signup } from "./components/pages/Signup.js";
-import { Login } from "./components/pages/Login.js";
-import { UserContextProvider } from "./Store/context";
-import Home from "./Home.js";
-import Header from "./components/Header/Header.js";
-import userContext from "./Store/context";
 import { useContext } from "react";
-import SearchedRecipes from "./components/Recipes/SearchedRecipes/SearchRecipes";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./Home.js";
+import userContext, { UserContextProvider } from "./Store/context";
+import Login from "./components/auth-pages/Login.js";
+import Signup from "./components/auth-pages/Signup.js";
+import Header from "./components/header/Header.js";
+import SearchedRecipes from "./components/recipes/searched-recipes/SearchRecipes.js";
 function App() {
   const context = useContext(userContext);
   return (
@@ -18,7 +16,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/login" element={<Login />} />
-
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchedRecipes />} />

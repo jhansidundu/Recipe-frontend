@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "./Popular.module.css";
 import axios from "axios";
-import { APIKEY, PROXY_URL } from "../../constants.js";
-// import MovieCard from "../MovieCard/MovieCard";
-import Recipe from "./Recipe/Recipe";
+import { APIKEY, PROXY_URL } from "../../../constants.js";
+import Recipe from "../recipe-card/Recipe.js";
 const Popular = () => {
   const [data, setData] = useState([]);
   let result = [];

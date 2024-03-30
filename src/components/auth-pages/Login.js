@@ -1,31 +1,19 @@
-import { login } from "../../services/api/endpoints/auth.Api";
-import React, { useState } from "react";
-import { useContext } from "react";
-import userContext from "../../Store/context";
-import axios from "axios";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userContext from "../../Store/context";
+import { login } from "../../services/api/endpoints/auth.api";
 export const Login = () => {
-  // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
-  // const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const context = useContext(userContext);
   const handleLogin = async (email, password) => {
-    const requestBody = {
+    const payload = {
       email: email,
-
       password: password,
     };
-
-    const config = {
-      data: requestBody, // This will be sent in the request body
-    };
-    const res = await login(config.data);
-    // console.log(res.name);
-    // console.log(res.data.accessToken);
+    const res = await login(payload);
     const accessToken = res.data.accessToken;
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("name", res.data.name);
@@ -33,19 +21,14 @@ export const Login = () => {
     context.setLogin(true);
     navigate("/");
   };
-  // Handle form submission
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Basic validation (replace with more robust validation)
     if (!email || !password) {
       setErrorMessage("Please fill in all fields");
       return;
     }
-
     handleLogin(email, password);
-
-    // Simulate login (replace with actual authentication logic)
   };
 
   return (
@@ -79,7 +62,5 @@ export const Login = () => {
     </div>
   );
 };
-
-// State variables to store user input
 
 export default Login;
