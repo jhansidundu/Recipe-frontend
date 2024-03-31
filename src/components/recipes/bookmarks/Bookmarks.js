@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { fetchPopularRecipes } from "../../../services/api/endpoints/recipe.api.js";
-import classes from "./Popular.module.css";
-import Pagination from "../../common/pagination/Pagination.js";
-import RecipeCard from "../recipe-card/RecipeCard.js";
-import userContext from "../../../store/context.js";
-const Popular = () => {
+import Pagination from "../../common/pagination/Pagination";
+import RecipeCard from "../recipe-card/RecipeCard";
+import classes from "./Bookmarks.module.css";
+import userContext from "../../../store/context";
+import { fetchAllBookmarks } from "../../../services/api/endpoints/bookmark.api";
+const Bookmarks = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
@@ -13,28 +13,33 @@ const Popular = () => {
     setCurrentPage(newPageNum);
   };
   useEffect(() => {
-    const getPopularRecipes = async () => {
+    const getBookmarks = async () => {
       try {
         showLoader();
-        const response = await fetchPopularRecipes();
+        const response = await fetchAllBookmarks();
         hideLoader();
-        setData(response.data.recipes);
+        setData(response.data);
       } catch (err) {
         handleAPIError(err);
       }
     };
 
-    getPopularRecipes();
+    getBookmarks();
   }, []);
   const startIdx = (currentPage - 1) * recordsPerPage;
   const endIdx = startIdx + recordsPerPage;
   const filteredData = data.slice(startIdx, endIdx);
   return (
     <div>
-      <h4 className={classes.title}>Popular Recipes</h4>
+      <h4 className={classes.title}>Your bookmarks</h4>
       <ul className={classes.box}>
         {filteredData.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} id={recipe.id} />
+          <RecipeCard
+            key={recipe.id}
+            isLiked={true}
+            recipe={recipe}
+            id={recipe.id}
+          />
         ))}
       </ul>
       <Pagination
@@ -47,4 +52,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default Bookmarks;

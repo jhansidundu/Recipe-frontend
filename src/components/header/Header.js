@@ -2,18 +2,18 @@ import { useContext, useRef } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import userContext from "../../Store/context.js";
+import userContext from "../../store/context.js";
 import classes from "./Header.module.css";
 const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const { isLoggedIn, handleLogout } = useContext(userContext);
 
-  function handleSearch() {
+  const handleSearch = () => {
     const searchQuery = searchRef.current.value;
     if (!searchQuery || !searchQuery.trim()) return;
     navigate(`/search?query=${searchQuery}`);
-  }
+  };
 
   const OnLogin = () => {
     navigate("/login");
@@ -21,8 +21,8 @@ const Header = () => {
   const onSignUp = () => {
     navigate("/signup");
   };
-  const onGetLike = () => {
-    navigate("/likedlist");
+  const onGotoBookmarks = () => {
+    navigate("/bookmarks");
   };
   const onSignOut = () => {
     handleLogout();
@@ -63,8 +63,8 @@ const Header = () => {
             </span>
           )}
           {isLoggedIn ? (
-            <span className={classes.headerLink} onClick={onGetLike}>
-              Bookmark
+            <span className={classes.headerLink} onClick={onGotoBookmarks}>
+              Bookmarks
             </span>
           ) : (
             ""

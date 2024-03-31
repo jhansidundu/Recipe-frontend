@@ -1,25 +1,28 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userContext from "../../Store/context";
+import userContext from "../../store/context";
 import { login } from "../../services/api/endpoints/auth.api";
 export const Login = () => {
   const [email, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const context = useContext(userContext);
+  const { showLoader, hideLoader, handleAPIError, setLogInState } =
+    useContext(userContext);
   const handleLogin = async (email, password) => {
-    const payload = {
-      email: email,
-      password: password,
-    };
-    const res = await login(payload);
-    const accessToken = res.data.accessToken;
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("name", res.data.name);
-    localStorage.setItem("email", res.data.email);
-    context.setIsLoggedIn(true);
-    navigate("/");
+    try {
+      showLoader();
+      const payload = {
+        email: email,
+        password: password,
+      };
+      const res = await login(payload);
+      hideLoader();
+      setLogInState(res.data);
+      navigate("/");
+    } catch (err) {
+      handleAPIError(err);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -32,7 +35,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div>
       <h1>Login</h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>

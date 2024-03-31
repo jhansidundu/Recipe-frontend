@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import userContext from "../../Store/context";
+import userContext from "../../store/context";
 import { signup } from "../../services/api/endpoints/auth.api";
 import { useNavigate } from "react-router-dom";
 export const Signup = () => {
@@ -8,19 +8,26 @@ export const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { setLogInState } = useContext(userContext);
+  const { setLogInState, handleAPIError, showLoader, hideLoader } =
+    useContext(userContext);
   const navigate = useNavigate();
   const handleSignup = async (name, email, phoneNumber, password) => {
-    const payload = {
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      password: password,
-    };
-    const res = await signup(payload);
-    // const { accessToken, email, name} = res.data;
-    setLogInState(res.data);
-    navigate("/");
+    try {
+      const payload = {
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: password,
+      };
+      showLoader();
+      const res = await signup(payload);
+      hideLoader();
+      // const { accessToken, email, name} = res.data;
+      setLogInState(res.data);
+      navigate("/");
+    } catch (err) {
+      handleAPIError(err);
+    }
   };
 
   // Handle form submission
@@ -36,7 +43,7 @@ export const Signup = () => {
   };
 
   return (
-    <div className="login-container">
+    <div>
       <h1>Signup</h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>

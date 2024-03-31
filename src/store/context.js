@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 const userContext = React.createContext({
   email: "",
-  setUserEmail: () => {},
   isLoggedIn: false,
+  isLoading: false,
+  setUserEmail: () => {},
   setIsLoggedIn: () => {},
   setLogInState: () => {},
   handleLogout: () => {},
+  showLoader: () => {},
+  hideLoader: () => {},
+  handleAPIError: () => {},
 });
 
 export const UserContextProvider = (props) => {
+  const [isLoading, setLoading] = useState(false);
+  const [_, setLoaderCount] = useState(0);
   const [userEmail, setUserEmail] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -28,6 +34,34 @@ export const UserContextProvider = (props) => {
     localStorage.removeItem("name");
   };
 
+  const showLoader = () => {
+    if (!isLoading) setLoading(true);
+    setLoaderCount((prev) => prev + 1);
+  };
+
+  const hideLoader = () => {
+    setLoaderCount((prev) => {
+      if (prev === 0) return prev;
+      if (prev === 1) {
+        setLoading(false);
+      }
+      return prev - 1;
+    });
+  };
+
+  const handleAPIError = (err) => {
+    if (err.response?.status === 401) {
+      handleLogout();
+      hideLoader();
+    } else if (err?.response?.status === 403) {
+      alert(err.response.data.message);
+    } else if (err?.response?.status === 400) {
+      alert(err.response.data.message);
+    } else {
+      alert("Unknown Error");
+    }
+  };
+
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
     if (userEmail) {
@@ -41,10 +75,14 @@ export const UserContextProvider = (props) => {
       value={{
         email: userEmail,
         isLoggedIn,
+        isLoading,
         setUserEmail,
         setIsLoggedIn,
         setLogInState,
         handleLogout,
+        showLoader,
+        hideLoader,
+        handleAPIError,
       }}
     >
       {props.children}
