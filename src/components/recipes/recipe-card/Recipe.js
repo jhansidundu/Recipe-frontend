@@ -3,7 +3,10 @@ import { AiFillHeart } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import userContext from "../../../Store/context";
 import image from "../../../assets/No_Image_Available.jpg";
-import { addToBookmark } from "../../../services/api/endpoints/bookmark.api";
+import {
+  addBookmark,
+  removeBookmark,
+} from "../../../services/api/endpoints/bookmark.api";
 import Card from "../../card/Card";
 import classes from "./Recipe.module.css";
 
@@ -15,17 +18,19 @@ const Recipe = ({ element, isLiked = false, onDisLike = null }) => {
   const url = element.image ? element.image : image;
 
   async function onAddLike(e) {
-    console.log(e);
     e.stopPropagation();
+    const recipeId = element.id;
+    const payload = {
+      recipeId,
+    };
     if (!liked) {
-      const recipeId = element.id;
-      const requestBody = {
-        recipeId,
-      };
-      await addToBookmark(requestBody);
-
+      await addBookmark(payload);
+      alert("Added to bookmarks");
       setLiked(true);
     } else {
+      await removeBookmark();
+      alert("Removed from bookmarks");
+      setLiked(false);
     }
   }
 
