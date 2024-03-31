@@ -35,7 +35,7 @@ const Recipe = ({ element, isLiked = false, onDisLike = null }) => {
   }
 
   let likeButton;
-  if (context.login) {
+  if (context.isLoggedIn) {
     likeButton = (
       <div
         onClick={onAddLike}

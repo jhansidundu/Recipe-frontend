@@ -7,7 +7,7 @@
 .logo h3 {
   margin: 0;
   padding: 0;
-  color: yellow;
+  color: white;
 }
 
 .header {
@@ -49,17 +49,23 @@
 }
 
 .searchParent {
+  position: relative;
   color: #555;
-  display: flex;
-  padding: 2px;
+  /* display: flex; */
+  /* padding: 2px; */
   border-radius: 5px;
   margin: auto;
 }
 
 .button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
   cursor: pointer;
   opacity: 0.8;
-  border: 2px solid rgb(84, 162, 239);
+  border: transparent;
+  /* border: 2px solid rgb(84, 162, 239); */
   background: transparent;
   color: white;
   padding: 0 0.5rem;

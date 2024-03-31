@@ -1,14 +1,12 @@
-import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./Home.js";
-import userContext, { UserContextProvider } from "./Store/context";
+import { UserContextProvider } from "./Store/context";
 import Login from "./components/auth-pages/Login.js";
 import Signup from "./components/auth-pages/Signup.js";
 import Header from "./components/header/Header.js";
-import SearchedRecipes from "./components/recipes/searched-recipes/SearchRecipes.js";
+import SearchedRecipes from "./components/recipes/searched-recipes/SearchedRecipes";
 function App() {
-  const context = useContext(userContext);
   return (
     <UserContextProvider>
       <BrowserRouter>

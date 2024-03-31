@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import userContext from "../../Store/context";
 import { login } from "../../services/api/endpoints/auth.api";
 export const Login = () => {
-  const [email, setEmail] = useState("");
+  const [email, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,7 +18,7 @@ export const Login = () => {
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("name", res.data.name);
     localStorage.setItem("email", res.data.email);
-    context.setLogin(true);
+    context.setIsLoggedIn(true);
     navigate("/");
   };
 
@@ -42,7 +42,7 @@ export const Login = () => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUserEmail(e.target.value)}
             placeholder="Enter your email"
           />
         </div>

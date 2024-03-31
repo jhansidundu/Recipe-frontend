@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import userContext from "../../Store/context";
 import { signup } from "../../services/api/endpoints/auth.api";
+import { useNavigate } from "react-router-dom";
 export const Signup = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setUserEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const context = useContext(userContext);
+  const { setLogInState } = useContext(userContext);
+  const navigate = useNavigate();
   const handleSignup = async (name, email, phoneNumber, password) => {
     const payload = {
       name: name,
@@ -16,10 +18,9 @@ export const Signup = () => {
       password: password,
     };
     const res = await signup(payload);
-    localStorage.setItem("email", res.email);
-    localStorage.setItem("name", res.name);
-    context.setEmail(res.email);
-    context.setLogin(true);
+    // const { accessToken, email, name} = res.data;
+    setLogInState(res.data);
+    navigate("/");
   };
 
   // Handle form submission
@@ -55,7 +56,7 @@ export const Signup = () => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUserEmail(e.target.value)}
             placeholder="Enter your email"
           />
         </div>
@@ -84,7 +85,5 @@ export const Signup = () => {
     </div>
   );
 };
-
-// State variables to store user input
 
 export default Signup;

@@ -7,12 +7,10 @@ import classes from "./Header.module.css";
 const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  const context = useContext(userContext);
+  const { isLoggedIn, handleLogout } = useContext(userContext);
 
   function handleSearch() {
     const searchQuery = searchRef.current.value;
-    console.log(typeof searchQuery);
-    console.log(searchQuery);
     if (!searchQuery || !searchQuery.trim()) return;
     navigate(`/search?query=${searchQuery}`);
   }
@@ -25,12 +23,7 @@ const Header = () => {
   };
   const onGetLike = () => {};
   const onSignOut = () => {
-    context.setLogin(false);
-    localStorage.removeItem("email");
-    localStorage.removeItem("userid");
-    localStorage.removeItem("name");
-    context.setLogin(false);
-
+    handleLogout();
     navigate("/");
   };
   return (
@@ -53,28 +46,28 @@ const Header = () => {
         </div>
 
         <div className={classes.InOut}>
-          {context.login ? (
+          {isLoggedIn ? (
             ""
           ) : (
             <span className={classes.headerLink} onClick={OnLogin}>
               Login
             </span>
           )}
-          {context.login ? (
+          {isLoggedIn ? (
             ""
           ) : (
             <span className={classes.headerLink} onClick={onSignUp}>
               Signup
             </span>
           )}
-          {context.login ? (
+          {isLoggedIn ? (
             <span className={classes.headerLink} onClick={onGetLike}>
               Bookmark
             </span>
           ) : (
             ""
           )}
-          {context.login ? (
+          {isLoggedIn ? (
             <span className={classes.headerLink} onClick={onSignOut}>
               Logout
             </span>
