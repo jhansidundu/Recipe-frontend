@@ -8,6 +8,7 @@ import Home from "./Home.js";
 import Header from "./components/Header/Header.js";
 import userContext from "./Store/context";
 import { useContext } from "react";
+import LikedItems from "./components/LikedItems.js/LikedItems";
 import SearchedRecipes from "./components/Recipes/SearchedRecipes/SearchRecipes";
 function App() {
   const context = useContext(userContext);
@@ -22,6 +23,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchedRecipes />} />
+          <Route path="/likedlist" element={<LikedItems />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

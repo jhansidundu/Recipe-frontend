@@ -25,7 +25,7 @@ const Header = () => {
     navigate("/signup");
   };
   const onGetLike = () => {
-    // navigate("/likedlist");
+    navigate("/likedlist");
   };
   const onSignOut = () => {
     context.setLogin(false);
