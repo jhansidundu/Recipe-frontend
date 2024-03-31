@@ -21,7 +21,9 @@ const Header = () => {
   const onSignUp = () => {
     navigate("/signup");
   };
-  const onGetLike = () => {};
+  const onGetLike = () => {
+    navigate("/likedlist");
+  };
   const onSignOut = () => {
     handleLogout();
     navigate("/");
