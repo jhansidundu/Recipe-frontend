@@ -1,0 +1,60 @@
+.pic {
+    /* width: 100%; */
+    /* height: 100%; */
+    display: flex;
+    /* border-top-right-radius: 0.5rem; */
+    /* border-top-left-radius: 0.5rem; */
+    justify-content: center
+
+  }
+  /* Base styles */
+.body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(42, 42, 42);
+  }
+  .recipeDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem; /* Adjust padding as needed */
+    margin-right: auto;
+    max-width: 800px; /* Adjust as needed */
+    background-color: #d3caca; /* Optional background color */
+    border-radius: 5px; /* Optional rounded corners */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+  }
+
+  .recipeCourse {
+
+    padding: 1rem;
+    background-color: lightyellow;
+    max-width: 200px;
+    border-radius: 5px;
+    width: 100%;
+
+  }
+  
+  .recipeContainer {
+    overflow: hidden;
+  }
+  
+  .recipeImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+  }
+  
+  .recipeTitle {
+    margin-top: 1rem; /* Adjust margin as needed */
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .recipeDetails {
+      padding: 0.5rem; /* Adjust padding for smaller screens */
+    }
+  }
+  

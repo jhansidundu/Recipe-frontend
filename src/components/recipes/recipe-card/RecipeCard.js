@@ -31,7 +31,7 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
         setLiked(true);
         alert("Added to bookmarks");
       } else {
-        await removeBookmark();
+        await removeBookmark(payload);
         setLiked(false);
         alert("Removed from bookmarks");
       }

@@ -58,7 +58,7 @@ export const UserContextProvider = (props) => {
     } else if (err?.response?.status === 400) {
       alert(err.response.data.message);
     } else {
-      alert("Unknown Error");
+      alert(err.response.data.message);
     }
   };
 
