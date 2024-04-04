@@ -31,7 +31,10 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
         setLiked(true);
         alert("Added to bookmarks");
       } else {
-        await removeBookmark();
+        await removeBookmark(payload);
+        if (!!onDislike) {
+          onDislike(recipeId);
+        }
         setLiked(false);
         alert("Removed from bookmarks");
       }
@@ -67,7 +70,7 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
 
   const url = recipe.image ? recipe.image : image;
   return (
-    <Card class={classes["card"]}>
+    <Card extraClass={classes["card"]}>
       <div onClick={goToRecipeDetails}>
         <div
           className={classes["image-container"]}

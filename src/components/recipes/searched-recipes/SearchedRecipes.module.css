@@ -1,7 +1,6 @@
-.popular {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.container {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
 }
 
 .box {
@@ -12,8 +11,6 @@
 }
 
 .title {
-  padding-top: 0.5rem;
-  padding-left: 1rem;
   color: aliceblue;
   size: 6rems;
   height: 3rem;

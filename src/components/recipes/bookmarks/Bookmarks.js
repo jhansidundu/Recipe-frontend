@@ -12,6 +12,12 @@ const Bookmarks = () => {
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
+
+  const handleRemoveBookmark = (recipeId) => {
+    const newBookmarks = data.filter((r) => r.id !== recipeId);
+    setData(newBookmarks);
+  };
+
   useEffect(() => {
     const getBookmarks = async () => {
       try {
@@ -30,8 +36,11 @@ const Bookmarks = () => {
   const endIdx = startIdx + recordsPerPage;
   const filteredData = data.slice(startIdx, endIdx);
   return (
-    <div>
-      <h4 className={classes.title}>Your bookmarks</h4>
+    <div className={classes.container}>
+      <h4 className={classes.title}>Bookmarks</h4>
+      {(!data || data.length === 0) && (
+        <p className="text-white">You don't have any bookmarks</p>
+      )}
       <ul className={classes.box}>
         {filteredData.map((recipe) => (
           <RecipeCard
@@ -39,6 +48,7 @@ const Bookmarks = () => {
             isLiked={true}
             recipe={recipe}
             id={recipe.id}
+            onDislike={handleRemoveBookmark}
           />
         ))}
       </ul>

@@ -5,8 +5,8 @@ export const fetchPopularRecipes = async () => {
   return response.data;
 };
 
-export const fetchSearchedRecipes = async (query) => {
-  const response = await api.get(`recipe/search?query=${query}`);
+export const fetchSearchedRecipes = async (payload) => {
+  const response = await api.post(`recipe/search`, payload);
   return response.data;
 };
 

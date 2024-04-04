@@ -9,11 +9,12 @@ const Pagination = ({ total, recodsPerPage, currentPage, onPageChange }) => {
       {numberOfPages > 1 && (
         <nav className="d-flex justify-content-center">
           <ul className="pagination">
-            <li
-              className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
-              onClick={() => onPageChange(currentPage - 1)}
-            >
-              <a className="page-link" aria-label="Previous">
+            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+              <a
+                className="page-link"
+                aria-label="Previous"
+                onClick={() => onPageChange(currentPage - 1)}
+              >
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -24,9 +25,13 @@ const Pagination = ({ total, recodsPerPage, currentPage, onPageChange }) => {
                   className={`page-item ${
                     pageNum === currentPage ? "active" : ""
                   }`}
-                  onClick={() => onPageChange(pageNum)}
                 >
-                  <a className="page-link">{pageNum}</a>
+                  <a
+                    className="page-link"
+                    onClick={() => onPageChange(pageNum)}
+                  >
+                    {pageNum}
+                  </a>
                 </li>
               );
             })}
@@ -35,9 +40,12 @@ const Pagination = ({ total, recodsPerPage, currentPage, onPageChange }) => {
               className={`page-item ${
                 currentPage === numberOfPages ? "disabled" : ""
               }`}
-              onClick={() => onPageChange(currentPage + 1)}
             >
-              <a className="page-link" aria-label="Next">
+              <a
+                className="page-link"
+                aria-label="Next"
+                onClick={() => onPageChange(currentPage + 1)}
+              >
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

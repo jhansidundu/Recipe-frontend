@@ -50,9 +50,9 @@ export const UserContextProvider = (props) => {
   };
 
   const handleAPIError = (err) => {
+    hideLoader();
     if (err.response?.status === 401) {
       handleLogout();
-      hideLoader();
     } else if (err?.response?.status === 403) {
       alert(err.response.data.message);
     } else if (err?.response?.status === 400) {

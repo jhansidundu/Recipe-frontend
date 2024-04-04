@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import classes from "./App.module.css";
-import Home from "./Home.js";
+import Home from "./components/home/Home.js";
 import Login from "./components/auth-pages/Login.js";
 import Signup from "./components/auth-pages/Signup.js";
 import Loader from "./components/common/loader/Loader.js";
@@ -16,6 +16,7 @@ const App = () => {
     <UserContextProvider>
       <BrowserRouter>
         {isLoading && <Loader />}
+        {/* <Loader /> */}
         <Header />
         <div className={classes.content}>
           <Routes>

@@ -2,22 +2,31 @@ import React, { useContext, useState } from "react";
 import userContext from "../../store/context";
 import { signup } from "../../services/api/endpoints/auth.api";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Card from "../common/card/Card";
+import classes from "./Auth.module.css";
+import Button from "react-bootstrap/Button";
 export const Signup = () => {
   const [name, setName] = useState("");
   const [email, setUserEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({
+    name: null,
+    email: null,
+    phoneNumber: null,
+    password: null,
+  });
   const { setLogInState, handleAPIError, showLoader, hideLoader } =
     useContext(userContext);
   const navigate = useNavigate();
-  const handleSignup = async (name, email, phoneNumber, password) => {
+  const handleSignup = async () => {
     try {
       const payload = {
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-        password: password,
+        name,
+        email,
+        phoneNumber,
+        password,
       };
       showLoader();
       const res = await signup(payload);
@@ -31,65 +40,99 @@ export const Signup = () => {
   };
 
   // Handle form submission
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     // validation
-    if (!name || !email || !phoneNumber || !password) {
-      setErrorMessage("Please fill in all fields");
+    let isFormValid = true;
+    if (!name || !name.trim()) {
+      setErrors((prev) => ({ ...prev, name: "Invalid username" }));
+      isFormValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, name: null }));
+    }
+    if (!email || !email.trim()) {
+      setErrors((prev) => ({ ...prev, email: "Invalid email" }));
+      isFormValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, email: null }));
+    }
+    if (!phoneNumber || !phoneNumber.trim() || phoneNumber.length !== 10) {
+      setErrors((prev) => ({ ...prev, phoneNumber: "Invalid phone number" }));
+      isFormValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, phoneNumber: null }));
+    }
+    if (!password || !password.trim() || password.length < 6) {
+      setErrors((prev) => ({
+        ...prev,
+        password: "Password must be atleast 6 characters",
+      }));
+      isFormValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, password: null }));
+    }
+    if (!isFormValid) {
       return;
     }
-    handleSignup(name, email, phoneNumber, password);
+    handleSignup();
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
+    <Card extraClass={classes.container}>
+      <Form>
+        <h3 className="text-center">Signup</h3>
+        <Form.Group className="mb-2">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
             type="text"
-            id="name"
-            value={name}
+            placeholder="Username"
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
+            value={name}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
+          {!!errors.name && (
+            <Form.Text className="text-danger">{errors.name}</Form.Text>
+          )}
+        </Form.Group>
+        <Form.Group className="mb-2">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Email"
             value={email}
             onChange={(e) => setUserEmail(e.target.value)}
-            placeholder="Enter your email"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input
-            type="tel"
-            id="phoneNumber"
+          {!!errors.email && (
+            <Form.Text className="text-danger">{errors.email}</Form.Text>
+          )}
+        </Form.Group>
+        <Form.Group className="mb-2">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Phone Number"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="Enter your phone number"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
+          {!!errors.phoneNumber && (
+            <Form.Text className="text-danger">{errors.phoneNumber}</Form.Text>
+          )}
+        </Form.Group>
+        <Form.Group className="mb-2">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
-            id="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
           />
-        </div>
-        <button type="submit">Signup</button>
-      </form>
-    </div>
+          {!!errors.password && (
+            <Form.Text className="text-danger">{errors.password}</Form.Text>
+          )}
+        </Form.Group>
+        <Button variant="primary" onClick={handleSubmit}>
+          Signup
+        </Button>
+      </Form>
+    </Card>
   );
 };
 
