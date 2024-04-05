@@ -3,6 +3,9 @@ import { fetchRecipeDetails } from "../../../services/api/endpoints/recipe.api";
 import axios from "axios";
 import classes from "./RecipeDetails.module.css";
 import { useParams } from "react-router-dom";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+
 const RecipeDetails = () => {
   const { recipeId } = useParams();
   const [details, setDetails] = useState({
@@ -353,7 +356,42 @@ const RecipeDetails = () => {
           <div className={classes.recipeTitle}> {details.title}</div>
           <br></br>
           <div className={classes.recipeCourse}>
-            Course: {details.dishTypes[0]}
+            <div>{details.summary}</div>
+            <b>For more info visit </b>
+
+            <a href={details.sourceUrl} target="_blank">
+              here
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className={classes.recipeInfo}>
+        <b> Course types</b>
+        <div className={classes.badge}>
+          <Badge bg="secondary" as={Button}>
+            {details.dishTypes[0]}
+          </Badge>
+          <Badge bg="secondary" as={Button}>
+            {details.dishTypes[1]}
+          </Badge>
+          <Badge bg="secondary" as={Button}>
+            {details.dishTypes[2]}
+          </Badge>
+          <Badge bg="secondary" as={Button}>
+            {details.dishTypes[3]}
+          </Badge>
+          <div>
+            <b> Servings</b>
+            <Badge bg="secondary" as={Button}>
+              {details.servings}
+            </Badge>
+          </div>
+
+          <div>
+            <b> PricePerServing</b>
+            <Badge bg="secondary" as={Button}>
+              {details.pricePerServing}
+            </Badge>
           </div>
         </div>
       </div>
