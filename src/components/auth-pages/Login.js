@@ -13,6 +13,8 @@ export const Login = () => {
   const [errors, setErrors] = useState({ email: null, password: null });
   const { showLoader, hideLoader, handleAPIError, setLogInState } =
     useContext(userContext);
+
+  // function for calling login api
   const handleLogin = async (email, password) => {
     try {
       showLoader();
@@ -29,6 +31,7 @@ export const Login = () => {
     }
   };
 
+  // handle submission
   const handleSubmit = async () => {
     let isFormValid = true;
 

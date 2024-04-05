@@ -15,17 +15,20 @@ const SearchedRecipes = () => {
   const recordsPerPage = 5;
   const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
 
+  // getting filter queries
   const query = searchParams.get("query");
   const type = searchParams.get("type");
   const cuisine = searchParams.get("cuisine");
   const diet = searchParams.get("diet");
   const intolerances = searchParams.get("intolerances");
 
+  // getting current page
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
 
   useEffect(() => {
+    // get all search movies
     const getSearchMovies = async () => {
       try {
         showLoader();
@@ -47,6 +50,7 @@ const SearchedRecipes = () => {
     getSearchMovies();
   }, [query]);
 
+  // setting intial and end numbers of card index for current page
   const startIdx = (currentPage - 1) * recordsPerPage;
   const endIdx = startIdx + recordsPerPage;
   const filteredData = data.slice(startIdx, endIdx);

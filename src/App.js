@@ -15,8 +15,6 @@ const App = () => {
   return (
     <UserContextProvider>
       <BrowserRouter>
-        {isLoading && <Loader />}
-        {/* <Loader /> */}
         <Header />
         <div className={classes.content}>
           <Routes>

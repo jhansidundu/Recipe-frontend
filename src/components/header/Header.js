@@ -11,12 +11,14 @@ const Header = () => {
   const location = useLocation();
   const { isLoggedIn, handleLogout } = useContext(userContext);
 
+  // function for getting search query
   const handleSearchOnEnter = (e) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
 
+  // searched text validation
   const handleSearch = () => {
     const searchQuery = searchRef.current.value;
     if (!searchQuery || !searchQuery.trim()) return;
@@ -37,6 +39,7 @@ const Header = () => {
     navigate("/");
   };
 
+  // search appearance
   let showSearch = !(
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
@@ -50,6 +53,7 @@ const Header = () => {
         <h3>Recipes</h3>
       </Link>
 
+      {/* search button */}
       {showSearch && (
         <div className={classes.searchParent}>
           <input
@@ -65,6 +69,7 @@ const Header = () => {
         </div>
       )}
 
+      {/* if user login then login should off*/}
       <div className={classes.InOut}>
         {isLoggedIn ? (
           ""
@@ -73,6 +78,8 @@ const Header = () => {
             Login
           </span>
         )}
+
+        {/* if user login then signup should off */}
         {isLoggedIn ? (
           ""
         ) : (
@@ -80,6 +87,8 @@ const Header = () => {
             Signup
           </span>
         )}
+
+        {/* if user login bookmark appear */}
         {isLoggedIn ? (
           <span className={classes.headerLink} onClick={onGotoBookmarks}>
             Bookmarks
@@ -87,6 +96,8 @@ const Header = () => {
         ) : (
           ""
         )}
+
+        {/* if user login logout appear */}
         {isLoggedIn ? (
           <span className={classes.headerLink} onClick={onSignOut}>
             Logout

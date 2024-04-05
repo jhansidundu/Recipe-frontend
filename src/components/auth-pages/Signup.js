@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Card from "../common/card/Card";
 import classes from "./Auth.module.css";
 import Button from "react-bootstrap/Button";
+
+//  user signup
 export const Signup = () => {
   const [name, setName] = useState("");
   const [email, setUserEmail] = useState("");
@@ -20,6 +22,8 @@ export const Signup = () => {
   const { setLogInState, handleAPIError, showLoader, hideLoader } =
     useContext(userContext);
   const navigate = useNavigate();
+
+  // function for calling sigup api
   const handleSignup = async () => {
     try {
       const payload = {
@@ -31,7 +35,7 @@ export const Signup = () => {
       showLoader();
       const res = await signup(payload);
       hideLoader();
-      // const { accessToken, email, name} = res.data;
+
       setLogInState(res.data);
       navigate("/");
     } catch (err) {

@@ -18,6 +18,7 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
   const [liked, setLiked] = useState(isLiked);
   const navigate = useNavigate();
 
+  // adding to bookmark and removing from bookmark
   const handleLikeAction = async (e) => {
     e.stopPropagation();
     try {
@@ -26,12 +27,17 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
         recipeId,
       };
       showLoader();
+
+      // adding to bookmark
       if (!liked) {
         await addBookmark(payload);
         setLiked(true);
         alert("Added to bookmarks");
       } else {
+        // remove from bookmark if already exist on click action
         await removeBookmark(payload);
+
+        //  remove card from page on dislike
         if (!!onDislike) {
           onDislike(recipeId);
         }
@@ -54,6 +60,8 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
   };
 
   let likeButton;
+
+  // if user loggedin then wishlist list symbol appears on the each recipe
   if (isLoggedIn) {
     likeButton = (
       <div
@@ -71,6 +79,7 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
   const url = recipe.image ? recipe.image : image;
   return (
     <Card extraClass={classes["card"]}>
+      {/* onclick on card to details */}
       <div onClick={goToRecipeDetails}>
         <div
           className={classes["image-container"]}

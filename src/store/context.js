@@ -18,6 +18,7 @@ export const UserContextProvider = (props) => {
   const [userEmail, setUserEmail] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // function for storing user data in localstoragge
   const setLogInState = ({ email, name, accessToken }) => {
     localStorage.setItem("email", email);
     localStorage.setItem("name", name);

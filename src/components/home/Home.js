@@ -9,9 +9,11 @@ const Home = () => {
     <Container fluid>
       <Row>
         <Col xs={2} className="p-0">
+          {/* filter for search */}
           <Filters />
         </Col>
         <Col>
+          {/* displaying popular recipes */}
           <Popular />
         </Col>
       </Row>

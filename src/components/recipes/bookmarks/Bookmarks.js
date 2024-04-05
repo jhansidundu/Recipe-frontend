@@ -9,19 +9,24 @@ const Bookmarks = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
   const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
+
+  // function for pagenavigation
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
 
+  // function for remove item from bookmark
   const handleRemoveBookmark = (recipeId) => {
     const newBookmarks = data.filter((r) => r.id !== recipeId);
     setData(newBookmarks);
   };
 
   useEffect(() => {
+    // functions for getting all bookmarks
     const getBookmarks = async () => {
       try {
         showLoader();
+
         const response = await fetchAllBookmarks();
         hideLoader();
         setData(response.data);
