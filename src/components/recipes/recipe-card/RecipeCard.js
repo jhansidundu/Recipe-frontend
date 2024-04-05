@@ -12,8 +12,7 @@ import classes from "./RecipeCard.module.css";
 import { useNavigate } from "react-router-dom";
 
 const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
-  const { isLoggedIn, showLoader, hideLoader, handleAPIError } =
-    useContext(userContext);
+  const { isLoggedIn, handleAPIError } = useContext(userContext);
   const [isHovered, setHover] = useState(false);
   const [liked, setLiked] = useState(isLiked);
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
       const payload = {
         recipeId,
       };
-      showLoader();
       if (!liked) {
         await addBookmark(payload);
         setLiked(true);
@@ -38,7 +36,6 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
         setLiked(false);
         alert("Removed from bookmarks");
       }
-      hideLoader();
     } catch (err) {
       handleAPIError(err);
     }
@@ -77,7 +74,7 @@ const RecipeCard = ({ recipe, isLiked = false, onDislike = null }) => {
           onMouseOver={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <img className={classes.pic} src={url} alt="movie" />
+          <img className={classes.pic} src={url} alt="recipe" />
           <div className={classes["blur-overlay"]}></div>
           {isHovered && likeButton}
         </div>

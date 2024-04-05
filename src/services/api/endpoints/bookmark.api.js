@@ -14,3 +14,8 @@ export const fetchAllBookmarks = async () => {
   const response = await api.get("bookmark/recipe");
   return response.data;
 };
+
+export const checkIfAlreadyBookmarked = async (recipeId) => {
+  const response = await api.get(`bookmark/recipe/${recipeId}/check`);
+  return response.data;
+};

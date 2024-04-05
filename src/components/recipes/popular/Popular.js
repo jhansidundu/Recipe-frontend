@@ -8,16 +8,14 @@ const Popular = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
-  const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
+  const { handleAPIError } = useContext(userContext);
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
   useEffect(() => {
     const getPopularRecipes = async () => {
       try {
-        showLoader();
         const response = await fetchPopularRecipes();
-        hideLoader();
         setData(response.data.recipes);
       } catch (err) {
         handleAPIError(err);

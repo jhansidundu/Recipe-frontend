@@ -4,22 +4,25 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
+// Component for showing filters for searching recipes
 const Filters = () => {
   const [filters, setFilers] = useState({
-    query: "",
-    type: "",
+    query: "", // for seaching using keyword
+    type: "", // recipe type
     cuisine: "",
     diet: "",
-    intolerances: "",
+    intolerances: "", // for recipes without intolerances
   });
 
   const navigate = useNavigate();
 
+  // generic function to handle filter input change
   const handleFilterChange = (e) => {
     const { value, name } = e.target;
     setFilers({ ...filters, [name]: value });
   };
 
+  // clear all the filters
   const handleClearFilters = () => {
     setFilers({
       query: "",
@@ -30,10 +33,11 @@ const Filters = () => {
     });
   };
 
-  const handleSearch = () => {
-    let url = `/search?`;
+  // on submitting recipe filters
+  const handleSubmit = () => {
     const { query, type, cuisine, intolerances, diet } = filters;
     const queryStrArr = [];
+    // form query strings for each filter
     if (!!query.trim()) {
       queryStrArr.push(`query=${query}`);
     }
@@ -49,7 +53,9 @@ const Filters = () => {
     if (!!diet.trim()) {
       queryStrArr.push(`diet=${diet}`);
     }
+    // join all the query strings
     const queryStr = queryStrArr.join("&");
+    // atleast one filter should be applied
     if (!!queryStr) {
       navigate(`/search?${queryStr}`);
     }
@@ -143,7 +149,7 @@ const Filters = () => {
         <Button variant="secondary" onClick={handleClearFilters}>
           Clear
         </Button>
-        <Button className="mx-2" onClick={handleSearch}>
+        <Button className="mx-2" onClick={handleSubmit}>
           Submit
         </Button>
       </Form>

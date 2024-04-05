@@ -8,7 +8,7 @@ const Bookmarks = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
-  const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
+  const { handleAPIError } = useContext(userContext);
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
@@ -21,9 +21,7 @@ const Bookmarks = () => {
   useEffect(() => {
     const getBookmarks = async () => {
       try {
-        showLoader();
         const response = await fetchAllBookmarks();
-        hideLoader();
         setData(response.data);
       } catch (err) {
         handleAPIError(err);

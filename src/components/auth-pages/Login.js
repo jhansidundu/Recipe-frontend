@@ -11,17 +11,14 @@ export const Login = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
-  const { showLoader, hideLoader, handleAPIError, setLogInState } =
-    useContext(userContext);
+  const { handleAPIError, setLogInState } = useContext(userContext);
   const handleLogin = async (email, password) => {
     try {
-      showLoader();
       const payload = {
         email: email,
         password: password,
       };
       const res = await login(payload);
-      hideLoader();
       setLogInState(res.data);
       navigate("/");
     } catch (err) {

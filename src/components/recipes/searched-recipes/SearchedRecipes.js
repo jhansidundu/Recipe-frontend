@@ -13,7 +13,7 @@ const SearchedRecipes = () => {
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
-  const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
+  const { handleAPIError } = useContext(userContext);
 
   const query = searchParams.get("query");
   const type = searchParams.get("type");
@@ -28,7 +28,6 @@ const SearchedRecipes = () => {
   useEffect(() => {
     const getSearchMovies = async () => {
       try {
-        showLoader();
         setData([]);
         const res = await fetchSearchedRecipes({
           query,
@@ -38,7 +37,6 @@ const SearchedRecipes = () => {
           intolerances,
         });
         setData(res.data.results);
-        hideLoader();
       } catch (err) {
         handleAPIError(err);
       }
