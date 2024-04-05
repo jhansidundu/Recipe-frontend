@@ -1,4 +1,15 @@
-const Pagination = ({ total, recodsPerPage, currentPage, onPageChange }) => {
+// Reusable componet to show pagination
+// props
+// total - totalNumberOfRecords
+// recordsPerPage - max number of records per page
+// currentPage
+// onPageChange - handling page change event
+const Pagination = ({
+  total,
+  recodsPerPage = 10,
+  currentPage,
+  onPageChange,
+}) => {
   const numberOfPages = parseInt(total / recodsPerPage);
   const pages = [];
   for (let i = 1; i <= numberOfPages; i++) {

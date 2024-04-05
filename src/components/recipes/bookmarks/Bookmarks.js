@@ -8,9 +8,7 @@ const Bookmarks = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
-  const { showLoader, hideLoader, handleAPIError } = useContext(userContext);
-
-  // function for pagenavigation
+  const { handleAPIError } = useContext(userContext);
   const handlePageChange = (newPageNum) => {
     setCurrentPage(newPageNum);
   };
@@ -25,10 +23,7 @@ const Bookmarks = () => {
     // functions for getting all bookmarks
     const getBookmarks = async () => {
       try {
-        showLoader();
-
         const response = await fetchAllBookmarks();
-        hideLoader();
         setData(response.data);
       } catch (err) {
         handleAPIError(err);

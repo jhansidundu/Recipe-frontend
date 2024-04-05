@@ -1,17 +1,14 @@
-import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import classes from "./App.module.css";
-import Home from "./components/home/Home.js";
 import Login from "./components/auth-pages/Login.js";
 import Signup from "./components/auth-pages/Signup.js";
-import Loader from "./components/common/loader/Loader.js";
 import Header from "./components/header/Header.js";
+import Home from "./components/home/Home.js";
 import Bookmarks from "./components/recipes/bookmarks/Bookmarks";
 import RecipeDetails from "./components/recipes/details/RecipeDetails.js";
 import SearchedRecipes from "./components/recipes/searched-recipes/SearchedRecipes";
-import userContext, { UserContextProvider } from "./store/context.js";
+import { UserContextProvider } from "./store/context.js";
 const App = () => {
-  const { isLoading } = useContext(userContext);
   return (
     <UserContextProvider>
       <BrowserRouter>

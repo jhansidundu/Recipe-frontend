@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import userContext from "../../store/context.js";
 import classes from "./Header.module.css";
 import { useLocation } from "react-router-dom";
+import { CiBookmarkCheck } from "react-icons/ci";
+
 const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
@@ -90,9 +92,12 @@ const Header = () => {
 
         {/* if user login bookmark appear */}
         {isLoggedIn ? (
-          <span className={classes.headerLink} onClick={onGotoBookmarks}>
-            Bookmarks
-          </span>
+          <>
+            {/* <CiBookmarkCheck color="white" /> */}
+            <span className={classes.headerLink} onClick={onGotoBookmarks}>
+              Bookmarks
+            </span>
+          </>
         ) : (
           ""
         )}

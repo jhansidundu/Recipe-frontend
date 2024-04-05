@@ -19,8 +19,7 @@ export const Signup = () => {
     phoneNumber: null,
     password: null,
   });
-  const { setLogInState, handleAPIError, showLoader, hideLoader } =
-    useContext(userContext);
+  const { setLogInState, handleAPIError } = useContext(userContext);
   const navigate = useNavigate();
 
   // function for calling sigup api
@@ -32,10 +31,8 @@ export const Signup = () => {
         phoneNumber,
         password,
       };
-      showLoader();
       const res = await signup(payload);
-      hideLoader();
-
+      // const { accessToken, email, name} = res.data;
       setLogInState(res.data);
       navigate("/");
     } catch (err) {
